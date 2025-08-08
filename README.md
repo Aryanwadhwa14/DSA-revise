@@ -65,11 +65,10 @@ public:
 4. Continue this process until all elements in the array have been processed.
 5. Finally, return the value of index, which represents the length of the modified array.
 
-### Complexity
-Time complexity:
-O(n)
-Space complexity:
-O(1)
+### Complexity : 
+Time complexity: O(n)
+Space complexity: O(1)
+
 --- 
 ## 3.  Remove Duplicates from Sorted Array [link](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/?envType=study-plan-v2&envId=top-interview-150)
 ## Notes : 
