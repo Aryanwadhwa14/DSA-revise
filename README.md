@@ -37,7 +37,7 @@ public:
 ### Intuition
 The intuition behind this solution is to iterate through the array and keep track of two pointers: index and i. The index pointer represents the position where the next non-target element should be placed, while the i pointer iterates through the array elements. By overwriting the target elements with non-target elements, the solution effectively removes all occurrences of the target value from the array.
 
-### Code : 
+### Code : (in cpp)
 
 ```bash
 class Solution {
@@ -59,7 +59,7 @@ public:
 1. Initialize index to 0, which represents the current position for the next non-target element.
 2. Iterate through each element of the input array using the i pointer.
 3. For each element nums`i`, check if it is equal to the target value.
-- If nums[i] is not equal to val, it means it is a non-target element.
+- If nums`i` is not equal to val, it means it is a non-target element.
 - Set nums `index` to nums`i` to store the non-target element at the current index position.
 - Increment index by 1 to move to the next position for the next non-target element.
 4. Continue this process until all elements in the array have been processed.
@@ -72,5 +72,40 @@ O(n)
 Space complexity:
 O(1)
 --- 
-##
+## 3.  Remove Duplicates from Sorted Array [link](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/?envType=study-plan-v2&envId=top-interview-150)
+## Notes : 
+### Approach & Step-by-Step Visualization🔍:
+The code starts iterating from i = 1 because we need to compare each element with its previous element to check for duplicates.
+
+1 . Initialize j = 1 (first unique element is already at nums[0]).
+
+2 . Loop from i = 1 to end:
+
+If nums[i] != nums[i-1] (new unique element found):
+▪ Store it at nums[j]
+▪ Increment j
+
+3 . Return j (number of unique elements).
+
+### code : 
+```bash
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int j = 1; // two pointer approach
+        for(int i = 1; i < nums.size(); i++){
+            if(nums[i] != nums[i - 1]){
+                nums[j] = nums[i];
+                j++;
+            } // for loop, if to check whether the element is in the array or not 
+        }    
+        return j;
+    }
+};
+```
+
+### Time Complexity : O (N) , Space complexity : O(1)
+
+
+
 
