@@ -75,17 +75,17 @@ O(1)
 ## 3.  Remove Duplicates from Sorted Array [link](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/?envType=study-plan-v2&envId=top-interview-150)
 ## Notes : 
 ### Approach & Step-by-Step Visualization🔍:
-The code starts iterating from i = 1 because we need to compare each element with its previous element to check for duplicates.
+The code starts iterating from `i = 1` because we need to compare each element with its previous element to check for duplicates.
 
-1 . Initialize j = 1 (first unique element is already at nums[0]).
+1 . Initialize `j = 1` (first unique element is already at nums[0]).
 
-2 . Loop from i = 1 to end:
+2 . Loop from `i = 1` to end:
 
-If nums[i] != nums[i-1] (new unique element found):
-▪ Store it at nums[j]
-▪ Increment j
+If `nums[i] != nums[i-1]` (new unique element found):
+▪ Store it at `nums[j]`
+▪ Increment `j`
 
-3 . Return j (number of unique elements).
+3 . Return `j` (number of unique elements).
 
 ### code : 
 ```bash
