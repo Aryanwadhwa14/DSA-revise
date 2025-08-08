@@ -102,7 +102,9 @@ public:
 };
 ```
 
-### Time Complexity : O (N) , Space complexity : O(1)
+###Complexity : 
+Time Complexity : O (N) 
+Space complexity : O(1)
 
 
 
