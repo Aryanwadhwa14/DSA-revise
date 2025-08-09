@@ -103,8 +103,50 @@ public:
 ```
 
 ### Complexity : 
-Time Complexity : O (N) 
-Space complexity : O(1)
+ Time Complexity : O (N) 
+ Space complexity : O(1)
+---
+## 4. 
+## Notes : 
+### Approach
+The goal of this function is to remove duplicates from the nums vector while keeping at most two occurrences of any element. The function returns the length of the modified vector after removing duplicates.
+
+Here's the approach implemented in the code:
+
+Initialize an integer variable i to 0. This variable will keep track of the current position in the modified nums vector.
+
+Use a for loop to iterate through each element ele in the nums vector using the range-based for loop.
+
+Inside the loop, check the following conditions:
+- i == 0: This condition ensures that the first element is always included in the modified vector.
+- i == 1: This condition ensures that the second element is always included in the modified vector.
+- nums[i-2] != ele: This condition checks if the current element ele is not the same as the element two positions before the current position i. This ensures that only two occurrences of any element are included in the modified vector.
+- If any of the above conditions are met, copy the current element ele to the nums[i] position in the modified vector, and increment i by 1 to move to the next position.
+- Repeat this process for all elements in the nums vector.
+
+- Finally, return the value of i, which represents the length of the modified vector with duplicates removed.
+
+- This approach effectively modifies the nums vector in place, removing duplicates while keeping at most two occurrences of each element. The function returns the length of the modified - vector, which can be used to access the unique elements in the first i positions of the vector
+
+### Code : 
+```bash
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int a = 0;
+        for(int i = 0;i<nums.size();i++){
+           if(a < 2 || nums[i] != nums[a-2]){
+            nums[a++] = nums[i];
+           }  // again for loop 
+           
+        }
+        return a;
+    }
+};
+```
+### Complexity : 
+Time complexity:0(N)
+Space complexity:0(1)
 
 
 
