@@ -1,4 +1,4 @@
-# DSA-revision of the 150 question series (3 per day) with notes ofc.   
+# DSA-revision of the 150 question series (3 per day) with notes ofc. (Documenting my journey) 
 ---
 # Top Interview 150 Leetcode  [link](https://leetcode.com/studyplan/top-interview-150/) 
 ---
@@ -103,10 +103,11 @@ public:
 ```
 
 ### Complexity : 
- Time Complexity : O (N) 
- Space complexity : O(1)
+Time Complexity : O (N) 
+Space complexity : O(1)
+
 ---
-## 4. 
+## 4. Remove Duplicates from Sorted Array II [link](https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/description/?envType=study-plan-v2&envId=top-interview-150)
 ## Notes : 
 ### Approach
 The goal of this function is to remove duplicates from the nums vector while keeping at most two occurrences of any element. The function returns the length of the modified vector after removing duplicates.
@@ -147,6 +148,64 @@ public:
 ### Complexity : 
 Time complexity:0(N)
 Space complexity:0(1)
+---
+
+## 5. Majority Element. [link](https://leetcode.com/problems/majority-element/submissions/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : Approach 1: Sorting
+### Intuition:
+The intuition behind this approach is that if an element occurs more than n/2 times in the array (where n is the size of the array), it will always occupy the middle position when the array is sorted. Therefore, we can sort the array and return the element at index n/2.
+
+Explanation:
+The code begins by sorting the array nums in non-decreasing order using the sort function from the C++ Standard Library. This rearranges the elements such that identical elements are grouped together.
+- Once the array is sorted, the majority element will always be present at index n/2, where n is the size of the array.
+- This is because the majority element occurs more than n/2 times, and when the array is sorted, it will occupy the middle position.
+- The code returns the element at index n/2 as the majority element.
+
+### Complexity : 
+Time Complexity : O(nlogn) 
+Space Complexity : O(1) 
+
+### Code : 
+```bash
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        return nums[n/2];
+    }
+};
+```
+---
+## 6. Rotate Array : [link](https://leetcode.com/problems/rotate-array/description/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : Approach
+Simple use of reverse function
+
+### Complexity : 
+Time complexity: O(N)
+Space complexity: O(1)
+
+Code : 
+```bash
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k = k % n; // Ensure k is within the range [0, n)
+
+        // Reverse the entire array
+        reverse(nums.begin(), nums.end());
+        
+        // Reverse the first k elements
+        reverse(nums.begin(), nums.begin() + k);
+        
+        // Reverse the rest of the elements after k
+        reverse(nums.begin() + k, nums.end());
+    }
+};
+```
+---
+7. -
 
 
 
