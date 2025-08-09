@@ -148,6 +148,7 @@ public:
 ### Complexity : 
 Time complexity:0(N)
 Space complexity:0(1)
+
 ---
 
 ## 5. Majority Element. [link](https://leetcode.com/problems/majority-element/submissions/?envType=study-plan-v2&envId=top-interview-150)
