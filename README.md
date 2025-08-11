@@ -206,7 +206,127 @@ public:
 };
 ```
 ---
-7. -
+## 7. Best time to buy and sell stock : [link](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : Approach
+ - Initialize variables buy with the first element of the prices array and profit as 0.
+ - Iterate through the prices starting from the second element.
+ - Update the buy variable if the current price is lower than the current buying price.
+ - Update the profit if the difference between the current price and the buying price is greater than the current profit.
+ - Return the final profit.
+
+### Kadane's Algorithm
+Kadane's Algorithm is a dynamic programming technique used to find the maximum subarray sum in an array of numbers. The algorithm maintains two variables: max_current represents the maximum sum ending at the current position, and max_global represents the maximum subarray sum encountered so far. At each iteration, it updates max_current to include the current element or start a new subarray if the current element is larger than the accumulated sum. The max_global is updated if max_current surpasses its value.
+
+### Relating with the Approach
+In the provided approach for finding the maximum profit in stock prices, the algorithm can be seen as a variation of Kadane's Algorithm. Instead of finding the maximum subarray sum directly, it focuses on finding the maximum positive difference between consecutive elements (prices) in the array.
+
+### Here's how the approach relates to Kadane's Algorithm:
+
+Initialization:
+
+In Kadane's Algorithm, max_current and max_global are initialized to the first element of the array.
+In the stock profit approach, buy is initialized with the first element of the prices array, and profit is initialized to 0.
+Iteration:
+
+Kadane's Algorithm iterates through the array, updating max_current based on the current element's value and deciding whether to start a new subarray.
+The stock profit approach iterates through the prices array, updating buy when a lower price is encountered and treating the difference between the current price and buy as a potential profit.
+Comparison and Update:
+
+Kadane's Algorithm compares and updates max_current and max_global at each iteration.
+The stock profit approach compares and updates profit whenever a positive difference between the current price and buy exceeds the current profit.
+
+### Complexity
+Time complexity: O(n), where n is the length of the prices array. The algorithm iterates through the array once.
+Space complexity: O(1), as only a constant amount of extra space is used. 
+
+code : 
+```bash
+class Solution {
+public:
+    int maxProfit(std::vector<int>& prices) {
+        int buy = prices[0];
+        int profit = 0;
+        for (int i = 1; i < prices.size(); i++) {
+            if (prices[i] < buy) {
+                buy = prices[i];
+            } else if (prices[i] - buy > profit) {
+                profit = prices[i] - buy;
+            }
+        }
+        return profit;
+    }
+};
+```
+--- 
+## 8. Best time to buy stock (part 2) [link](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : 
+Intuition
+Approach
+We can find max profit, using greedy approach. i.e. we make optimal decision as we iterate over array.
+If prices[i] < prices[i+1], add profit = prices[i + 1] - prices[i] into sum.
+At the end of array we will have maximum profit that can be made. Return the sum.
+Complexity
+Time complexity: O(n)
+Space complexity: O(1) 
+
+### Code : 
+```bash
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+         int res = 0;
+        int n = prices.size();
+
+        for (int i = 1; i < n; i++) {
+            if (prices[i] > prices[i - 1]) {
+                res += prices[i] - prices[i - 1];
+            }
+        }
+        return res;
+    }
+};
+```
+## 9. Jump game [link](https://leetcode.com/problems/jump-game/?envType=study-plan-v2&envId=top-interview-150)
+### notes : Intuition
+The goal is to determine if we can reach the last index from the first index.
+Since each number represents how far we can jump, we need a way to track the farthest point reachable as we go.
+
+### Approach
+We use a greedy strategy and keep a variable maxReach to store the farthest index we can reach at any point.
+As we iterate through the array:
+
+If the current index i is greater than maxReach, it means we are stuck and can't proceed.
+Otherwise, we update maxReach to the maximum of its current value and i + nums[i].
+If we can iterate through the entire array without getting stuck, we can reach the last index.
+
+### Complexity
+Time complexity:
+O(n) — We iterate through the array once
+
+Space complexity:
+O(1) — No extra space used
+
+Code : 
+``` bash
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int need = 1;
+        if(nums.size() == 1) return true;
+        for (int i=nums.size()-2; i>0; i--) {
+            if (nums[i] < need) {
+                need++;
+            } else {
+                need = 1;
+            }
+        }
+        return (nums[0] >= need); 
+    }
+};
+``` 
+
+
+   
 
 
 
