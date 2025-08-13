@@ -402,13 +402,83 @@ public:
             if (cumulativePapers >= hIndex) {
                 return hIndex;
             }
-        }
+        }Insert Delete GetRandom O(1)
         return 0;        
     }
 };
 ```
-12. 
+---
+## 12. Insert Delete GetRandom O(1) [link](https://leetcode.com/problems/insert-delete-getrandom-o1/description/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : Intuition
+To support all operations in average O(1) time, we need:
+An array for O(1) random access.
+A hash map to track element positions for O(1) insert/delete.
 
+### Approach
+ - insert: Add to array and store index in a map.
+ - remove: Swap target with last, pop it, and update map.
+ - getRandom: Return a random element from array.
+ - This trick is a must-know for interviews and shows up often in design questions.
+
+### Complexity
+
+Time Complexity:
+( O(1) ) — for insert, remove, and getRandom.
+
+Space Complexity:
+( O(n) ) — to store elements and positions.
+
+### Code : 
+```bash
+class RandomizedSet {
+    vector<int> v;
+    unordered_map<int,int> mp;
+public:
+   
+    RandomizedSet() {
+    }
+
+    bool search(int val){
+
+         if(mp.find(val)!=mp.end())
+            return true;
+         return false;
+
+    }
+
+    
+    bool insert(int val) {
+
+        if(search(val))
+            return false;
+
+        v.push_back(val);
+        mp[val] = v.size()-1;
+        return true;
+    }
+
+    
+    bool remove(int val) {
+
+        if(!search(val))
+            return false;
+
+       
+        auto it = mp.find(val);
+        v[it->second] = v.back();
+        v.pop_back();
+        mp[v[it->second]] = it->second;
+        mp.erase(val);
+        return true;
+    }
+
+   
+    int getRandom() {
+
+        return v[rand()%v.size()];
+    }
+};
+```
    
 
 
