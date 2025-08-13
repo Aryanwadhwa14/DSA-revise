@@ -323,8 +323,91 @@ public:
         return (nums[0] >= need); 
     }
 };
-``` 
+```
+---
+## 10. Jump Game II [link](https://leetcode.com/problems/jump-game-ii/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : Intuition
+The problem asks for the minimum number of jumps to reach the last index in an array where each element represents the maximum jump length from that position. My first thought is to treat this like a greedy range expansion problem—at each position, jump to the place that allows us to reach the farthest in the future. Instead of checking every possible sequence of jumps (which would be too slow), we can always choose the jump that gives the maximum reach from the current range.
 
+### Approach
+We first precompute a jumps array where jumps[i] = i + nums[i] (the farthest position reachable from index i).
+We start at index 0 and repeatedly select the next position that can reach the farthest point in the future within the current jump's range. This is done by iterating over all positions from i+1 to i + nums[i] and picking the one with the maximum jumps[j]. Each time we move to this new position, we increment the jump count. If from the current position we can already reach or cross the last index, we make one final jump and terminate. This greedy strategy ensures the minimum number of jumps.
+
+### Complexity : 
+
+Time complexity: O(n^2)
+
+Space complexity: O(n)
+
+### Code : 
+```bash
+class Solution {
+public:
+
+    int jump(vector<int>& nums) {
+
+      for(int i = 1; i < nums.size(); i++)
+      {
+        nums[i] = max(nums[i] + i, nums[i-1]);
+      }
+
+      int ind = 0;
+      int ans = 0;
+
+      while(ind < nums.size() - 1)
+      {
+        ans++;
+        ind = nums[ind];
+      }
+
+      return ans;
+    }
+};
+```
+--- 
+## 11. H-index [link](https://leetcode.com/problems/h-index/solutions/7068659/fastest-most-optimal-binary-search-approach-no-extra-space-h-index/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : Intuition
+Instead of sorting the array or using extra space, we can use binary search on the possible h values (from 0 to max(citation)), counting how many papers meet the threshold each time.
+
+### Approach
+ - Find the maximum citations in the array to define the binary search range.
+ - Apply binary search on h:
+Count how many papers have citations ≥ mid.
+ - If count ≥ mid, move right (possible higher h-index).
+ - Else, move left.
+Return the best possible h.
+
+### Time Complexity
+O(n log m), where n is the number of papers and m is the max citation count.
+
+### Space Complexity
+O(1) — No extra arrays used.
+
+### Code :
+
+```bash
+class Solution {
+public:
+    int hIndex(vector<int>& citations) {
+        int papers = citations.size();
+        vector<int> citationBuckets(papers + 1, 0);
+
+        for (int citation : citations) {
+            citationBuckets[min(citation, papers)]++;
+        }
+
+        int cumulativePapers = 0;
+        for (int hIndex = papers; hIndex >= 0; hIndex--) {
+            cumulativePapers += citationBuckets[hIndex];
+            if (cumulativePapers >= hIndex) {
+                return hIndex;
+            }
+        }
+        return 0;        
+    }
+};
+```
+12. 
 
    
 
