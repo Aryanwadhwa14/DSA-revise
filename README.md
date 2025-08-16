@@ -684,6 +684,54 @@ public:
 };
 ```
 
+## 17. Roman to integer [link](https://leetcode.com/problems/roman-to-integer/?envType=study-plan-v2&envId=top-interview-150)
+### notes : Intuition
+Roman numerals follow a simple rule:
+Normally, values are added (e.g., "VIII" = 5 + 1 + 1 + 1 = 8).
+But when a smaller numeral appears before a larger one, it means subtraction (e.g., "IV" = 5 − 1 = 4).
+So, the key idea is to scan the string from left to right and decide whether to add or subtract each numeral based on the next one.
+
+### Approach
+Create a mapping of Roman characters to their integer values (I → 1, V → 5, X → 10, ...).
+Initialize a result variable result = 0.
+
+Traverse the string:
+If the current character’s value is less than the next character’s value, subtract it from result.
+Otherwise, add it to result.
+At the end, result contains the final integer value.
+
+### Complexity
+Time complexity:
+   O(n)
+Space complexity:
+O(1) 
+
+### Code : 
+```bash
+class Solution {
+public:
+    int romanToInt(string s) {
+        unordered_map<char , int> m ={
+            {'I' , 1} , {'V' , 5} , {'X' , 10} , {'L' , 50} , {'C' , 100} , {'D' , 500} , {'M' , 1000}
+            };
+            int result = 0  ;
+            int n = s.length() ; 
+            for(int i = 0  ; i < n ; i++){
+                if(i + 1 < n && m[s[i]] < m[s[i+1]] ) {
+                    result -= m[s[i]] ; 
+                }else {
+                    result += m[s[i]] ; 
+                }
+
+
+            }
+        return result ; 
+
+    }
+
+};
+```
+
 
 
 
