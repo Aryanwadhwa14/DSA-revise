@@ -479,7 +479,60 @@ public:
     }
 };
 ```
-   
+## 13. Product of Array except Self [link](https://leetcode.com/problems/product-of-array-except-self/description/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : Intuition
+Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+
+### My Approach : 
+Our approach is simple. now we have to take the product of the array and store it.
+here we have three cases:-
+where we do have no zeros at all :- here we can just simply store the product and at each nums[i]=product/nums[i] which results in getting the complete product except that number.
+where we have 1 zero :- Here we have to return all the elements as zero except that one original zero as the product of rest all numbers.
+where we have more than 1 zero :- here the complete array would be zero as the result so we simply return the n size array containing all zeros.
+
+### Complexity : 
+Time complexity: O(n)
+Space complexity: O(n)
+
+### Code : 
+```bash
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> result(n);
+        int zeroCount = 0;
+        int product = 1;
+        
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 0) {
+                zeroCount++;
+            } else {
+                product *= nums[i];
+            }
+        }
+        
+        if (zeroCount > 1) {
+            return vector<int>(n, 0);
+        }
+        
+        for (int i = 0; i < n; i++) {
+            if (zeroCount == 1) {
+                if (nums[i] == 0) {
+                    result[i] = product;
+                } else {
+                    result[i] = 0;
+                }
+            } else {
+                result[i] = product / nums[i];
+            }
+        }
+        
+        return result;
+    }
+};
+```
+
 
 
 
