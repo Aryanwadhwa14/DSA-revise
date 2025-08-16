@@ -532,6 +532,134 @@ public:
     }
 };
 ```
+## 14. Gas Station : [link](https://leetcode.com/problems/gas-station/solutions/3011141/c-easy-solution-with-explaination-in-o-n-time-complexity-beats-97/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : Intuition
+Here we will apply greedy approach
+
+### Approach
+In the question given that
+If there exists a solution, it is guaranteed to be unique
+-This lines clearly tells us that we have unique or no solution exists
+
+Here two cases are possible
+
+if our total_gas is less than our total cost in that case we can't complete our journey ,so will return -1
+Now we have a unique solution that means single starting_point exists
+To find that point we will keep track of my current_gas+=gas[i]-cost[i]
+lets suppose at any index our current gas became negative so we can clearly say that till that index all the gas station between ith and starting point are bad, starting point as well.
+So, this means we can start trying at next gas_station on the i+1 station
+
+### Complexity
+Time complexity:O(N)
+Space complexity:O(1)
+
+### Code : 
+```bash
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        int n = cost.size(), bal = 0, start = 0, deficit = 0;
+
+        for(int i = 0; i< n; i++){
+            bal += gas[i] - cost[i];
+
+            if(bal < 0){
+
+                deficit += bal;
+                start = i+1;
+                bal = 0;
+            }
+        }
+        return bal + deficit >= 0 ? start : -1;
+    }
+}; //beats 100% solutions 
+```
+## 15. Candy [link](https://leetcode.com/problems/candy/solutions/7082183/greedy-candy-giveaway/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : Intuition
+One pass can only satisfy one side’s rule (left or right neighbor). Two passes ensure both rules holds. Taking the max ensures the child meets both requirements.
+
+### Approach
+Left to Right pass: Start with 1 candy each. If ratings[i] > ratings[i-1], give left[i] = left[i-1] + 1.
+Right to Left pass: Again start with 1 candy each from the right. If ratings[i] > ratings[i+1], give right[i] = right[i+1] + 1.
+Combine: For each child, take max(left[i], right[i]) and sum.
+
+### Complexity
+Time complexity:
+O(3n) — 3 passes over the array.
+
+Space complexity:
+Space: O(2n) — two helper arrays.
+
+### Code : 
+```bash
+class Solution {
+public:
+    int candy(vector<int>& ratings) 
+    {
+        int n=ratings.size();
+        vector<int>left(n,-1);
+        int inc=0;
+        left[0]=1;
+        for(int i=1;i<n;i++)
+        {
+            if(ratings[i-1]<ratings[i])
+            {
+                inc = left[i - 1] + 1; 
+                left[i] = inc;
+            }
+            else
+            {
+                inc=1;
+                left[i]=inc;
+            }
+        }
+        vector<int>right(n,-1);
+        right[n-1]=1;
+        for(int i=n-2;i>=0;i--)
+        {
+            if(ratings[i]>ratings[i+1])
+            {
+                inc=right[i+1]+1;
+                right[i]=inc;
+            }
+            else
+            {
+                inc=1;
+                right[i]=inc;
+            }
+        }
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            ans+=max(left[i],right[i]);
+        }
+        return ans;
+    }
+//please upvote 
+};
+```
+## 16. Trapping rain water [link](https://leetcode.com/problems/trapping-rain-water/description/?envType=study-plan-v2&envId=top-interview-150)
+### Intuition
+Imagine water trapped between bars. The amount of water at each index depends on the shorter of the tallest bars to the left and right.
+We can precompute this and use math to subtract the height of the current bar to find the trapped water at that point.
+
+### Approach : 
+Use two arrays:
+left[i]: the max height from the left up to index i
+right[i]: the max height from the right up to index i
+For each index i, trapped water is min(left[i], right[i]) - height[i]
+Sum this for all indices to get total water.
+
+### Complexity : 
+Time Complexity: O(n) – single pass for left, right, and result.
+Space Complexity: O(n) – extra arrays left and right.
+
+
+
+
+
 
 
 
