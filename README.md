@@ -732,6 +732,101 @@ public:
 };
 ```
 
+## 18. Integer to Roman : [link](https://leetcode.com/problems/integer-to-roman/description/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : Create mappings 
+
+### code : 
+```bash
+class Solution {
+public:
+    string intToRoman(int num) {
+        string ones[] = {"","I","II","III","IV","V","VI","VII","VIII","IX"};
+        string tens[] = {"","X","XX","XXX","XL","L","LX","LXX","LXXX","XC"};
+        string hrns[] = {"","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"};
+        string ths[]={"","M","MM","MMM"};
+        
+        return ths[num/1000] + hrns[(num%1000)/100] + tens[(num%100)/10] + ones[num%10];
+    }
+};
+```
+
+## 19. Length of the last word : [link](https://leetcode.com/problems/length-of-last-word/solutions/4954087/97-43-easy-solution-with-explanation/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : Intuition
+To solve this problem, we need to find the last word in the string and return its length. We can achieve this by splitting the string into words and then returning the length of the last word.
+
+### Approach
+1. Strip trailing whitespaces from the input string using the strip() method.
+2. Split the string into words using the split() method.
+3. If there are no words after stripping whitespaces, return 0.
+4. Otherwise, return the length of the last word, which is the last element in the list of words.
+
+### Time complexity:
+1. Stripping trailing whitespaces takes linear time, so it's O(n) where n is the length of the input string.
+2. Splitting the string into words also takes linear time, so it's also O(n).
+3. The overall time complexity is O(n).
+
+### Space complexity:
+We store the list of words, which could take up to O(n) space if all characters in the input string are non-whitespace.
+
+### Code : 
+```bash
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int length = 0;
+        bool counting = false;
+        
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s[i] != ' ') {
+                counting = true;
+                length++;
+            }
+            else if (counting) {
+                break;
+            }
+        }
+        
+        return length;
+    }
+};
+```
+## 20. Longest Common prefix : [link](https://leetcode.com/problems/longest-common-prefix/solutions/3273176/python3-c-java-19-ms-beats-99-91/?envType=study-plan-v2&envId=top-interview-150)
+### Notes : This code implements the longestCommonPrefix function that takes a list of strings v as input and returns the longest common prefix of all the strings. Here is an explanation of how the code works:
+
+Initialize an empty string ans to store the common prefix.
+Sort the input list v lexicographically. This step is necessary because the common prefix should be common to all the strings, so we need to find the common prefix of the first and last string in the sorted list.
+Iterate through the characters of the first and last string in the sorted list, stopping at the length of the shorter string.
+If the current character of the first string is not equal to the current character of the last string, return the common prefix found so far.
+Otherwise, append the current character to the ans string.
+Return the ans string containing the longest common prefix.
+
+### Time and Space Complexity 
+time complexity : O(n)
+space complexity : O(1)
+### Code : 
+```bash
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& v) {
+        string ans = "";
+        sort(v.begin(),v.end());
+        int n = v.size();
+        string first = v[0], last=v[n-1];
+        for(int i=0 ; i< min(first.size(),last.size()) ; i++){
+            if(first[i]!=last[i]){
+                return ans ;
+
+            }
+            ans+= first[i];
+        }
+        return ans ;
+
+        
+    }
+};
+```
+
+
 
 
 
